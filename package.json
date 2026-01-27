@@ -1,5 +1,5 @@
 {
-  "name": "@caelinsutch/agentlink",
+  "name": "agentlink-cli",
   "version": "0.1.2",
   "description": "Canonical .agents manager with symlinks for popular AI tools",
   "type": "module",
