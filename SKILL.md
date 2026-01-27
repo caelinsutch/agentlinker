@@ -1,14 +1,14 @@
-# agentlink - AI Assistant Skill Guide
+# agentlinker - AI Assistant Skill Guide
 
 ## Overview
 
-agentlink is a CLI tool that manages a canonical `.agents` folder, creating symlinks to distribute configuration across multiple AI coding assistants (Claude, Cursor, Codex, Factory, OpenCode).
+agentlinker is a CLI tool that manages a canonical `.agents` folder, creating symlinks to distribute configuration across multiple AI coding assistants (Claude, Cursor, Codex, Factory, OpenCode).
 
 **Core concept**: One source of truth (`.agents/`) that automatically syncs to all AI tool config directories.
 
-## When to Use agentlink
+## When to Use agentlinker
 
-Use agentlink when a user wants to:
+Use agentlinker when a user wants to:
 - Set up shared AI assistant configuration across tools
 - Manage commands, skills, hooks, or AGENTS.md files
 - Configure monorepo inheritance for AI configs
@@ -20,22 +20,22 @@ Use agentlink when a user wants to:
 
 ```bash
 # Interactive mode - guided setup
-agentlink
+agentlinker
 
 # Initialize a new .agents folder
-agentlink init
-agentlink init --scope=project    # Non-interactive
-agentlink init --scope=global     # Non-interactive
+agentlinker init
+agentlinker init --scope=project    # Non-interactive
+agentlinker init --scope=global     # Non-interactive
 
 # Selective inheritance in monorepos
-agentlink compose                 # Interactive picker
-agentlink compose --include-commands=build.md,test.md --agents-md=extend
+agentlinker compose                 # Interactive picker
+agentlinker compose --include-commands=build.md,test.md --agents-md=extend
 
 # Preview changes without applying
-agentlink --dry-run
+agentlinker --dry-run
 
 # Watch mode for monorepos (auto-rebuild on changes)
-agentlink --watch
+agentlinker --watch
 ```
 
 ### Command Flags
@@ -135,9 +135,9 @@ Child configs override parent configs. The chain is resolved by walking up the d
 
 ```bash
 cd my-project
-agentlink init --scope=project
+agentlinker init --scope=project
 # Creates .agents/ with AGENTS.md template
-agentlink
+agentlinker
 # Links to Claude, Cursor, etc.
 ```
 
@@ -145,17 +145,17 @@ agentlink
 
 ```bash
 cd packages/web
-agentlink init --scope=project
-agentlink compose --include-commands=build.md,test.md --agents-md=extend --yes
-agentlink
+agentlinker init --scope=project
+agentlinker compose --include-commands=build.md,test.md --agents-md=extend --yes
+agentlinker
 ```
 
 ### Example 3: Global Configuration
 
 ```bash
-agentlink init --scope=global
+agentlinker init --scope=global
 # Creates ~/.agents/
-agentlink
+agentlinker
 # Links to all client global configs
 ```
 
@@ -169,7 +169,7 @@ agentlink
 
 ## Key Behaviors
 
-1. **Safe re-runs**: Running agentlink multiple times is safe - it repairs/updates links
+1. **Safe re-runs**: Running agentlinker multiple times is safe - it repairs/updates links
 2. **Automatic backups**: Creates `.agents/backup/<timestamp>` before overwrites
 3. **Undo support**: Can restore from backup via interactive menu
 4. **Dry-run mode**: Preview all changes before applying
@@ -179,7 +179,7 @@ agentlink
 
 ### Common Issues
 
-1. **Links not updating**: Run `agentlink` again to repair
+1. **Links not updating**: Run `agentlinker` again to repair
 2. **Conflicts**: Use "Force overwrite" option or `--yes` flag
 3. **Monorepo not detected**: Ensure parent `.agents/` folder exists
 4. **Merged content stale**: Delete `.agents/merged/` and re-run
@@ -187,7 +187,7 @@ agentlink
 ### Checking Status
 
 ```bash
-agentlink
+agentlinker
 # Select "Show status" to see link health
 ```
 

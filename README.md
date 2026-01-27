@@ -1,5 +1,5 @@
 <div align="center">
-  <strong>agentlink</strong>
+  <strong>agentlinker</strong>
   <br />
   <em>One canonical .agents folder that powers all your AI tools.</em>
 
@@ -15,12 +15,12 @@ Requirements: Node 18+ or Bun 1.3+.
 
 Run the guided CLI:
 ```bash
-npx agentlink
+npx agentlinker
 ```
 
 Or with Bun:
 ```bash
-bunx agentlink
+bunx agentlinker
 ```
 
 Choose a workspace (Global, Monorepo, or Project), select the clients you want to manage, and follow the prompts. You can run it again anytime to repair links or undo changes.
@@ -30,28 +30,28 @@ Choose a workspace (Global, Monorepo, or Project), select the clients you want t
 ### Initialize
 Create a new `.agents` folder:
 ```bash
-agentlink init                    # Interactive
-agentlink init --scope=project    # Non-interactive (project scope)
-agentlink init --scope=global     # Non-interactive (global scope)
+agentlinker init                    # Interactive
+agentlinker init --scope=project    # Non-interactive (project scope)
+agentlinker init --scope=global     # Non-interactive (global scope)
 ```
 
 ### Compose (Monorepo)
 Selectively inherit from parent `.agents`:
 ```bash
-agentlink compose                 # Interactive picker
-agentlink compose --include-commands=build.md,test.md --agents-md=extend
+agentlinker compose                 # Interactive picker
+agentlinker compose --include-commands=build.md,test.md --agents-md=extend
 ```
 
 ### Watch (Monorepo)
 Auto-rebuild merged content on file changes:
 ```bash
-agentlink --watch
+agentlinker --watch
 ```
 
 ### Dry Run
 Preview changes without applying:
 ```bash
-agentlink --dry-run
+agentlinker --dry-run
 ```
 
 ## What it does
@@ -74,7 +74,7 @@ Hierarchical inheritance for monorepos. Child packages can extend or override pa
 
 ## Monorepo Support
 
-agentlink automatically detects when you're in a monorepo by walking up the directory tree looking for `.agents` folders.
+agentlinker automatically detects when you're in a monorepo by walking up the directory tree looking for `.agents` folders.
 
 ### Inheritance Chain
 
@@ -82,7 +82,7 @@ agentlink automatically detects when you're in a monorepo by walking up the dire
 ~/.agents (global) → monorepo/.agents (root) → packages/foo/.agents (child)
 ```
 
-When you select "Monorepo" scope, agentlink prompts you to configure inheritance:
+When you select "Monorepo" scope, agentlinker prompts you to configure inheritance:
 
 - **Inherit all** - Use parent config for everything
 - **Standalone** - Ignore parent config completely
@@ -127,17 +127,17 @@ exclude:
 
 ### Selective Inheritance with Compose
 
-Use `agentlink compose` to interactively select which commands, skills, and hooks to inherit from parent `.agents` folders:
+Use `agentlinker compose` to interactively select which commands, skills, and hooks to inherit from parent `.agents` folders:
 
 ```bash
 cd packages/web
-agentlink compose
+agentlinker compose
 ```
 
 Or use flags for non-interactive mode:
 
 ```bash
-agentlink compose \
+agentlinker compose \
   --include-commands=build.md,lint.md \
   --include-skills=shared-skill/ \
   --agents-md=extend
@@ -181,7 +181,7 @@ my-monorepo/
 │       └── package.json
 ```
 
-When running `agentlink` in `packages/web/`:
+When running `agentlinker` in `packages/web/`:
 - AGENTS.md is merged (root + child content)
 - Commands include both `build.md` (from root) and `deploy.md` (from child)
 - Skills are inherited from root
@@ -246,11 +246,11 @@ bun run build
 
 ## Notes
 
-- Cursor supports `.claude/commands` and `.claude/skills` (global or project). agentlink also links `.agents/commands` → `.cursor/commands` and `.agents/skills` → `.cursor/skills`.
+- Cursor supports `.claude/commands` and `.claude/skills` (global or project). agentlinker also links `.agents/commands` → `.cursor/commands` and `.agents/skills` → `.cursor/skills`.
 - OpenCode uses `~/.config/opencode/AGENTS.md` and prefers AGENTS.md over CLAUDE.md when both exist.
 - Codex prompts always symlink to `.agents/commands` (canonical source).
 - Skills require a valid `SKILL.md` with `name` + `description` frontmatter.
-- Claude prompt precedence: if `.agents/CLAUDE.md` exists, it links to `.claude/CLAUDE.md`. Otherwise `.agents/AGENTS.md` is used. After adding or removing `.agents/CLAUDE.md`, re-run agentlink and apply/repair links to update the symlink. Factory/Codex always link to `.agents/AGENTS.md`.
+- Claude prompt precedence: if `.agents/CLAUDE.md` exists, it links to `.claude/CLAUDE.md`. Otherwise `.agents/AGENTS.md` is used. After adding or removing `.agents/CLAUDE.md`, re-run agentlinker and apply/repair links to update the symlink. Factory/Codex always link to `.agents/AGENTS.md`.
 - Project scope creates `.agents` plus client folders for commands/hooks/skills only. Rule files (`AGENTS.md`/`CLAUDE.md`) are left to the repo root so you can manage them explicitly.
 - Backups are stored under `.agents/backup/<timestamp>` and can be restored via "Undo last change."
 - Merged content (for monorepo `extend` mode) is stored in `.agents/merged/` and regenerated as needed.

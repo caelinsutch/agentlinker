@@ -1,11 +1,11 @@
 {
-  "name": "agentlink-cli",
-  "version": "0.1.2",
+  "name": "agentlinker",
+  "version": "0.1.0",
   "description": "Canonical .agents manager with symlinks for popular AI tools",
   "type": "module",
   "license": "MIT",
   "bin": {
-    "agentlink": "dist/cli.js"
+    "agentlinker": "dist/cli.js"
   },
   "files": [
     "dist",

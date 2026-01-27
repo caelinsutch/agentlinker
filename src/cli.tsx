@@ -27,7 +27,7 @@ import type { Client, ExtendBehavior, IncludeConfig, InheritanceChain, LinkStatu
 import { undoLastChange } from './core/undo.js';
 import { setupGracefulShutdown, startWatch } from './core/watch.js';
 
-const appTitle = 'agentlink';
+const appTitle = 'agentlinker';
 
 // Parse CLI arguments
 const args = process.argv.slice(2);
@@ -679,12 +679,12 @@ async function runInit(): Promise<void> {
         '1. Edit AGENTS.md to describe your project and coding conventions',
         '2. Add custom commands to the commands/ directory',
         '3. Add skills to the skills/ directory',
-        '4. Run `agentlink` to sync with AI coding clients',
+        '4. Run `agentlinker` to sync with AI coding clients',
       ];
 
       if (result.isMonorepo && !createConfig) {
         nextStepsLines.push('');
-        nextStepsLines.push(chalk.dim('Tip: Run `agentlink init` again to add config.yaml for monorepo settings'));
+        nextStepsLines.push(chalk.dim('Tip: Run `agentlinker init` again to add config.yaml for monorepo settings'));
       }
 
       note(nextStepsLines.join('\n'), 'Next steps');
@@ -794,9 +794,9 @@ async function runCompose(): Promise<void> {
 
   if (!chain.current) {
     if (nonInteractive) {
-      console.error('Error: No .agents folder in current directory. Run `agentlink init --scope=project` first.');
+      console.error('Error: No .agents folder in current directory. Run `agentlinker init --scope=project` first.');
     } else {
-      note('No .agents folder in current directory. Run `agentlink init` first.', 'Missing .agents');
+      note('No .agents folder in current directory. Run `agentlinker init` first.', 'Missing .agents');
       outro('Bye');
     }
     process.exit(1);
@@ -987,7 +987,7 @@ async function runCompose(): Promise<void> {
       `  - AGENTS.md: ${agentsMdBehavior}`,
     ];
     note(summaryLines.join('\n'), 'Configuration saved');
-    note('Run `agentlink` to apply the changes and create symlinks.', 'Next step');
+    note('Run `agentlinker` to apply the changes and create symlinks.', 'Next step');
     outro('Done!');
   }
 }
